@@ -1,8 +1,7 @@
 """
-    Commands cog for Talos
+    Commands cog for East
     Holds all commands usable by any user, and a couple of classes relevant to those commands.
-
-    Author: CraftSpider
+    Author: CraftSpider, HiddenStorys
 """
 import discord
 from discord.ext import commands
@@ -22,7 +21,7 @@ def sort_mem(member):
 
 
 class Commands:
-    """These commands can be used by anyone, as long as Talos is awake.\nThey don't care who is using them."""
+    """These commands can be used by anyone, as long as East is awake.\n He doesn't care who is using them."""
 
     __slots__ = ['bot']
 
@@ -36,7 +35,7 @@ class Commands:
     noun = ["dog", "cat", "robot", "astronaut", "man", "woman", "person", "child", "giant", "elephant", "zebra",
             "animal", "box", "tree", "wizard", "mage", "swordsman", "soldier", "inventor", "doctor", "Talos",
             "dinosaur", "insect", "nerd", "dancer", "singer", "actor", "barista", "acrobat", "gamer", "writer",
-            "dragon"]
+            "dragon", "East"]
     adjective = ["happy", "sad", "athletic", "giant", "tiny", "smart", "silly", "unintelligent", "funny",
                  "coffee-loving", "lazy", "spray-tanned", "angry", "disheveled", "annoying", "loud", "quiet", "shy",
                  "extroverted", "jumpy", "ditzy", "strong", "weak", "smiley", "annoyed", "dextrous"]
@@ -69,24 +68,24 @@ class Commands:
     
     @commands.command()
     async def information(self, ctx):
-        """Gives a short blurb about Talos."""
-        await ctx.send("Hello! I'm Talos, official PtP mod-bot.\
-                           \nMy Developers are CraftSpider, Dino, and HiddenStorys.\
-                           \nAny suggestions or bugs can be sent to my email, talos.ptp@gmail.com.")
+        """Gives a short blurb about East."""
+        await ctx.send("Hey, I'm East! Official joke-bot of nothing.\
+                           \nMy Developers are CraftSpider, Dino, and HiddenStorys, but Hidd's the one who keeps up on my code.\
+                           \nAny suggestions or bugs can be promptly disregarded, because my update schedule is horrible. Or just pass them along to Hidden.")
 
     @commands.command()
     async def discord_tos(self, ctx):
         """Disclaimer for discord TOS"""
-        await ctx.send("Talos will in the process of running possibly log your username and log commands that you give "
+        await ctx.send("East will in the process of running possibly log your username and log commands that you give "
                        "it. Due to Discord TOS, you must be informed and consent to any storage of data you send here. "
                        "This data will never be publicly shared except at your request, and only used to help run Talos"
                        " and support features that require it. If you have any questions about this or problems with it"
-                       " , please talk to one of the Talos developers for information and we'll see what we can do to "
+                       " , please talk to HiddenStorys or CraftSpider for information and we'll see what we can do to "
                        "help")
 
     @commands.command()
     async def version(self, ctx):
-        """Returns Talos version."""
+        """Returns East version."""
         await ctx.send("Version: {0}".format(self.bot.VERSION))
 
     @commands.command()
@@ -95,31 +94,37 @@ class Commands:
         try:
             rolls, limit = map(int, dice.lower().split('d'))
         except ValueError:
-            await ctx.send('Format has to be in NdN!')
+            await ctx.send('I can\'t read that. Could you put it in NdN?')
             return
         try:
             result = ', '.join(str(random.randint(1, limit)) for _ in range(rolls))
         except ValueError:
-            await ctx.send("Minimum second value is 1")
+            await ctx.send("Can't go any lower than 1, sorry.")
             return
         if result is "":
-            await ctx.send("Minimum first value is 1")
+            await ctx.send("Can't go any lower than 1, sorry.")
             return
         await ctx.send(result)
-        
+       
+    @commands.command()
+    async def BEWARE(self, ctx):
+    	"""A gag command"""
+    	await ctx.send("BEWARE the Box Ghost! http://vignette1.wikia.nocookie.net/dpwikia/images/4/44/S01e03_Box_Ghost_arms_wide.png") 
+
+
     @commands.command(description='For when you wanna settle the score some other way',
                       usage="[choice 1], [choice 2], ...")
     async def choose(self, ctx, *choices: str):
         """Chooses between multiple choices."""
         choices = " ".join(choices)
         if "," not in choices:
-            await ctx.send("I need at least two choices to choose between!")
+            await ctx.send("Come on, we both know that to make a decision you need *two* things to pick between.")
             return
-        out = "I'm choosing between: {}.\n".format(choices)
-        if random.randint(1, 500) == 1:
-            out += "None of the above"
-        elif random.randint(1, 500) == 500:
-            out += "All of the above"
+        out = "You're asking me to choose between: {}.\n".format(choices)
+        if random.randint(1, 5) == 1:
+            out += "I'm not really feeling like making a decision right now."
+        elif random.randint(1, 5) == 500:
+            out += "You should just go with everything. Trust me, I know what I'm doing."
         else:
             choices = choices.split(",")
             out += random.choice(choices).strip()
@@ -128,18 +133,26 @@ class Commands:
     @commands.command()
     async def time(self, ctx):
         """Prints out the current time in UTC, HH:MM:SS format"""
-        await ctx.send("It's time to get a watch. {0}".format(datetime.datetime.utcnow().strftime("%H:%M:%S")))
+        await ctx.send("Why do you keep asking me what time it is? {0}".format(datetime.datetime.utcnow().strftime("%H:%M:%S")))
     
+    @commands.command()
+    async def magicShow(self, ctx): 
+    	await ctx.send("ABRACADABRA!")
+
+    @commands.command()
+    async def sexyMagicShow(self, ctx):
+    	await ctx.send("Abraca*damn*")
+    	
     @commands.command(aliases=["ww", "WW"])
     async def wordwar(self, ctx, length: str="", start: str=""):
         """Runs an X minute long word-war"""
         try:
             length = float(length)
         except Exception:
-            await ctx.send("Please specify the length of your word war (in minutes).")
+            await ctx.send("How many minutes do you wanna go?")
             return
         if length > 60 or length < 1:
-            await ctx.send("Please choose a length between 1 and 60 minutes.")
+            await ctx.send("Hey, please give me a number between 1 and 60.")
             return
 
         if start:
@@ -154,12 +167,12 @@ class Commands:
                 await ctx.send("Start time format broken. Starting now.")
                 start = ""
             if start != "" and (start > 59 or start < 0):
-                await ctx.send("Please specify a start time in the range of 0 to 59.")
+                await ctx.send("Could I have a start time between 0 to 59?")
                 return
 
         if start:
             dif = abs(datetime.datetime.utcnow() - datetime.datetime.utcnow().replace(minute=start, second=0))
-            await ctx.send("Starting WW at :{0:02}".format(start))
+            await ctx.send("The ww is going at :{0:02}".format(start))
             await asyncio.sleep(dif.total_seconds())
         minutes = "minutes" if length != 1 else "minute"
         await ctx.send("Word War for {0:g} {1}.".format(length, minutes))
@@ -169,14 +182,13 @@ class Commands:
     @commands.command()
     async def credits(self, ctx):
         """Giving credit where it is due"""
-        await ctx.send("Primary Developers: CraftSpider, Dino.\n"
-                       "Other contributors: Wundrweapon, HiddenStorys\n"
-                       "Artist: Misty Tynan")
+        await ctx.send("Primary Developers: CraftSpider, HiddenStorys, Dino.\n"
+                       "Other contributors: Wundrweapon")
     
     @commands.command()
     async def joined(self, ctx, member: discord.Member):
         """Says when a member joined."""
-        await ctx.send('{0.name} joined in {0.joined_at}'.format(member))
+        await ctx.send('{0.name} joined the party at {0.joined_at}'.format(member))
     
     @commands.command()
     async def uptime(self, ctx):
@@ -187,7 +199,7 @@ class Commands:
     async def generate(self, ctx):
         """Generates a crawl or prompt"""
         if ctx.invoked_subcommand is None:
-            await ctx.send("Valid options are 'prompt' and 'crawl'.")
+            await ctx.send("You can only use 'prompt' or 'crawl'.")
     
     @generate.command(name='crawl')
     async def _crawl(self, ctx):
@@ -207,19 +219,41 @@ class Commands:
         obstacle = random.choice(self.obstacle)
         await ctx.send("A story about a {} {} who must {} while {}.".format(adj, noun, goal, obstacle))
 
+    @commands.command()
+    async def promote(self, ctx):
+    	"""Gives a list of stories and art."""
+    	await ctx.send("What's that? You want to hear about the writing that's been going on around the chat? Well boy do I have news for you! \n First, we've got some awesome drawings from Q: (link here.) \n and then there's 'Am I Not Just' by Hidden! (link) \n If you'd like your work featured on this list, feel free to send it in to me!")
+    	await ctx.send("Thanks for listening! Check back later, and there might be something new up.")
+
+    @commands.command()
+    async def Hamilton(self, ctx):
+    	"""Spews out some Hamilton"""
+    	await ctx.send("[BURR] After the war I went back to New York\n[HAMILTON] A-After the war I went back to New York\n[BURR] I finished up my studies and I practiced law\n[HAMILTON] I practiced law, Burr worked next door\n[BURR] Even though we started at the very same time Alexander Hamilton began to climb How to account for his rise to the top?")
+
+    @commands.command()
+    async def PrincessBride(self, ctx):
+    	await ctx.send("Hello. My name is Inigo Montoya. You killed my father. Prepare to die.")
+
+    @commands.command()
+    async def oh_my(self, ctx):
+    	await ctx.send("^Hi there...")
+    	await ctx.send("How do I say this without sounding weird?")
+    	await ctx.send("You have very nice programming, Talos.")
+
     @commands.group(aliases=["pw", "PW"])
     async def productivitywar(self, ctx):
         """Commands for a productivity war."""
         if ctx.invoked_subcommand is None:
-            await ctx.send("Valid options are 'create', 'join', 'start', 'leave', and 'end'.")
+            await ctx.send("You can either 'create', 'join', 'start', 'leave', or 'end' a pw!")
+
 
     @productivitywar.command(name='create')
     async def _create(self, ctx):
         """Begins a new PW, if one isn't already running."""
         if active_pw[ctx.guild.id] is not None:
-            await ctx.send("There's already a PW going on. Would you like to **join**?")
+            await ctx.send("There's already a PW going on, and I can't double up. Would you like to **join**?")
         else:
-            await ctx.send("Creating a new PW.")
+            await ctx.send("I'm starting a new PW!")
             active_pw[ctx.guild.id] = PW()
             active_pw[ctx.guild.id].join(ctx.author)
 
@@ -228,11 +262,11 @@ class Commands:
         """Join a currently running PW, if you aren't already in it."""
         if active_pw[ctx.guild.id] is not None:
             if active_pw[ctx.guild.id].join(ctx.author):
-                await ctx.send("User {} joined the PW.".format(ctx.author))
+                await ctx.send("User {} finally thought to join us.".format(ctx.author))
             else:
-                await ctx.send("You're already in this PW.")
+                await ctx.send("You're already here, and you can't join twice.")
         else:
-            await ctx.send("No PW to join. Maybe you want to **create** one?")
+            await ctx.send("There isn't a PW to join. Maybe you should try to **create** one?")
 
     @productivitywar.command(name='start')
     async def _start(self, ctx):
@@ -242,9 +276,9 @@ class Commands:
                 await ctx.send("Starting PW")
                 active_pw[ctx.guild.id].begin()
             else:
-                await ctx.send("PW has already started! Would you like to **join**?")
+                await ctx.send("There's already a pw going on! Want to **join**?")
         else:
-            await ctx.send("No PW to start. Maybe you want to **create** one?")
+            await ctx.send("You can't start a pw that doesn't exist. Maybe you want to **create** one?")
 
     @productivitywar.command(name='leave')
     async def _leave(self, ctx):
@@ -252,11 +286,11 @@ class Commands:
         if active_pw[ctx.guild.id] is not None:
             leave = active_pw[ctx.guild.id].leave(ctx.author)
             if leave == 0:
-                await ctx.send("User {} left the PW.".format(ctx.author))
+                await ctx.send("User {} left the PW and all of us.".format(ctx.author))
             elif leave == 1:
-                await ctx.send("You aren't in the PW! Would you like to **join**?")
+                await ctx.send("You aren't in the PW! You should come and **join** us.")
             elif leave == 2:
-                await ctx.send("You've already left this PW! Are you going to **end** it?")
+                await ctx.send("You've already left the PW! Do you want to **end** it?")
             if active_pw[ctx.guild.id].get_finished():
                 await self._end.invoke(ctx)
         else:
@@ -266,7 +300,7 @@ class Commands:
     async def _end(self, ctx):
         """End the whole PW, if one is currently running."""
         if active_pw[ctx.guild.id] is None:
-            await ctx.send("There's currently no PW going on. Would you like to **create** one?")
+            await ctx.send("There's currently no PW going on, but you can **create** one.")
         elif not active_pw[ctx.guild.id].get_started():
             await ctx.send("Deleting un-started PW.")
             active_pw[ctx.guild.id] = None
@@ -278,7 +312,7 @@ class Commands:
             out += "Start: {}\n".format(cur_pw.start.replace(microsecond=0).strftime("%b %d - %H:%M:%S"))
             out += "End: {}\n".format(cur_pw.end.replace(microsecond=0).strftime("%b %d - %H:%M:%S"))
             out += "Total: {}\n".format(cur_pw.end.replace(microsecond=0) - cur_pw.start.replace(microsecond=0))
-            out += "Times:\n"
+            out += "Times:\n    East - ∞ \n"
             cur_pw.members.sort(key=sort_mem, reverse=True)
             for member in cur_pw.members:
                 out += "    {0} - {1}\n".format(member.user, member.end.replace(microsecond=0) - member.start.replace(microsecond=0))
@@ -291,7 +325,7 @@ class Commands:
         """Dumps info about the current state of a running PW"""
         cur_pw = active_pw[ctx.guild.id]
         if cur_pw is None:
-            await ctx.send("No PW currently running")
+            await ctx.send("All of the PWs running are in an alternate dimension.")
             return
         out = "```"
         out += "Start: {}\n".format(cur_pw.start)
