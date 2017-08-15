@@ -1,8 +1,7 @@
 """
     Talos for Discord
     A python based bot for discord, good for writing and a couple of minor shenanigans.
-
-    Author: CraftSpider
+    Author: CraftSpider, Hiddenstorys
 """
 import discord
 import traceback
@@ -63,7 +62,7 @@ class Talos(commands.Bot):
     @asyncio.coroutine
     def on_command_error(self, ctx, exception):
         if type(exception) == discord.ext.commands.CommandNotFound:
-            yield from ctx.send("Sorry, I don't understand \"{}\". May I suggest ^help?".format(ctx.invoked_with))
+            yield from ctx.send("Sorry, I don't get what you mean by \"{}\". Try !East help.".format(ctx.invoked_with))
         else:
             print('Ignoring exception in command {}'.format(ctx.command), file=sys.stderr)
             traceback.print_exception(type(exception), exception, exception.__traceback__, file=sys.stderr)
@@ -112,8 +111,8 @@ def json_save(filename, **options):
 
 if __name__ == "__main__":
 
-    description = '''Greetings. I'm Talos, chat helper. My commands are:'''
-    bot = Talos(command_prefix='^', description=description)
+    description = '''Hey, I'm East, and I'm here to help! You can get me to do stuff with these commands::'''
+    bot = Talos(command_prefix='!East ', description=description)
 
     for extension in STARTUP_EXTENSIONS:
         try:
@@ -124,7 +123,7 @@ if __name__ == "__main__":
     try:
         json_data = json_load(SAVE_FILE)
         if json_data is not None:
-            build_trees(json_data)
+            pass
         bot.run(load_token())
     finally:
-        print("Talos Exiting")
+        print("East is out.")
