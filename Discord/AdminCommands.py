@@ -1,7 +1,6 @@
 """
     Admin Commands cog for Talos.
     Holds all commands relevant to administrator function, be it server specific or all of Talos.
-
     Author: CraftSpider
 """
 import discord
@@ -58,32 +57,32 @@ class AdminCommands:
     @commands.command()
     @admin_check()
     async def nick(self, ctx, nick: str):
-        """Changes Talos nickname"""
+        """Changes East's nickname"""
         await ctx.me.edit(nick=nick)
         await ctx.send("Nickname changed to {}".format(nick))
 
     @commands.command(hidden=True)
     @admin_only()
     async def playing(self, ctx, *playing: str):
-        """Changes the game Talos is playing"""
+        """Changes the game East is playing"""
         game = " ".join(map(str, playing))
         await self.bot.change_presence(game=discord.Game(name=game, type="0"))
-        await ctx.send("Now playing {}".format(game))
+        await ctx.send("Hey, I'm playing {}".format(game))
 
     @commands.command(hidden=True)
     @admin_only()
     async def stop(self, ctx):
-        """Stops Talos running and logs it out."""
-        await ctx.send("Et Tu, Brute?")
+        """Stops East from running and logs him out."""
+        await ctx.send("See you suckers later!")
         await self.bot.logout()
 
     @commands.command(hidden=True)
     @admin_only()
     async def master_nick(self, ctx, nick: str):
-        """Changes Talos nickname in all servers"""
+        """Changes East's nickname in all servers"""
         for guild in self.bot.guilds:
             await guild.me.edit(nick=nick)
-        await ctx.send("Nickname universally changed to {}".format(nick))
+        await ctx.send("Hey, someone changed my name! Now it's {}".format(nick))
 
     @commands.command(hidden=True)
     @admin_only()
@@ -98,7 +97,7 @@ class AdminCommands:
             out += "```"
             await ctx.send(out)
         else:
-            await ctx.send("No ops currently")
+            await ctx.send("I don't have any ops, sorry.")
 
     @commands.command()
     @admin_check()
@@ -111,7 +110,7 @@ class AdminCommands:
             out += "```"
             await ctx.send(out)
         else:
-            await ctx.send("This server currently has no operators.")
+            await ctx.send("This server doesn't have any operators.")
 
     @commands.command()
     @admin_check()
@@ -122,7 +121,7 @@ class AdminCommands:
             await ctx.send("Opped {0.name}!".format(member))
             await self.bot.save()
         else:
-            await ctx.send("That user is already an op!")
+            await ctx.send("That user is already an op! Now they're double opped!")
 
     @commands.command(aliases=["de_op"])
     @admin_check()
