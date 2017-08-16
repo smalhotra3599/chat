@@ -142,7 +142,7 @@ class Commands:
     @commands.command()
     async def sexyMagicShow(self, ctx):
     	await ctx.send("Abraca*damn*")
-    	
+
     @commands.command(aliases=["ww", "WW"])
     async def wordwar(self, ctx, length: str="", start: str=""):
         """Runs an X minute long word-war"""
@@ -197,32 +197,43 @@ class Commands:
     
     @commands.group()
     async def generate(self, ctx):
-        """Generates a crawl or prompt"""
+        """Generates a crawl or shit post"""
         if ctx.invoked_subcommand is None:
-            await ctx.send("You can only use 'prompt' or 'crawl'.")
+            await ctx.send("You can only use 'shitPost' or 'crawl'.")
     
     @generate.command(name='crawl')
     async def _crawl(self, ctx):
         """Generates a crawl"""
         place_adj = random.choice(self.place_adjective)
         place = random.choice(self.place)
-        words = str(random.randint(50, 500))
+        words = str(random.randint(50, 1000))
         action = random.choice(self.action)
         await ctx.send("You enter the {} {}. Write {} words as you {}.".format(place_adj, place, words, action))
     
-    @generate.command(name='prompt')
-    async def _prompt(self, ctx):
+    @generate.command(name='shitPost')
+    async def _shitPost(self, ctx):
         """Generates a prompt"""
         adj = random.choice(self.adjective)
         noun = random.choice(self.noun)
         goal = random.choice(self.goal)
         obstacle = random.choice(self.obstacle)
-        await ctx.send("A story about a {} {} who must {} while {}.".format(adj, noun, goal, obstacle))
+        await ctx.send("Do not trust a {} who can {} and still be {}.".format(noun, goal, obstacle))
 
+    @commands.command()
+    async def hello(self, ctx):
+    	await ctx.send("Hiya!");
+
+    @commands.command()
+    async def hi(self, ctx):
+    	await ctx.send("Hiya!")
+
+    
     @commands.command()
     async def promote(self, ctx):
     	"""Gives a list of stories and art."""
-    	await ctx.send("What's that? You want to hear about the writing that's been going on around the chat? Well boy do I have news for you! \n First, we've got some awesome drawings from Q: (link here.) \n and then there's 'Am I Not Just' by Hidden! (link) \n If you'd like your work featured on this list, feel free to send it in to me!")
+    	await ctx.send("What's that? You want to hear about the writing that's been going on around the chat? Well boy do I have news for you! \n First, we've got some awesome drawings from Q: https://pre07.deviantart.net/0777/th/pre/i/2017/223/8/5/commissions__open___4_4__by_benzyon-db0zsgf.jpg")
+    	await ctx.send("and then there's 'Am I Not Just' by Hidden! https://www.wattpad.com/story/118988403-am-i-not-just") 
+    	await ctx.send("If you'd like your work featured on this list, feel free to send it in to Hiddenstorys! I'd really like to see some new writers up here.")	
     	await ctx.send("Thanks for listening! Check back later, and there might be something new up.")
 
     @commands.command()
@@ -237,8 +248,22 @@ class Commands:
     @commands.command()
     async def oh_my(self, ctx):
     	await ctx.send("^Hi there...")
+    	await asyncio.sleep(2)
     	await ctx.send("How do I say this without sounding weird?")
     	await ctx.send("You have very nice programming, Talos.")
+
+
+    @commands.command()
+    async def reminders(self, ctx):
+    	await ctx.send("Have you had anything to drink recently?")
+    	await asyncio.sleep(3600)
+    	await ctx.send("When's the last time you ate anything?")
+    	await asyncio.sleep(3600)
+    	await ctx.send("If you're writing, stretch your wrists!")
+    	await asyncio.sleep(3600)
+    	await ctx.send("Hey, stretch your legs and walk around for a minute.")
+    	await asyncio.sleep(3600)
+    	await ctx.send("When's the last time you were outside?") 
 
     @commands.group(aliases=["pw", "PW"])
     async def productivitywar(self, ctx):
