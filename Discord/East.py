@@ -123,7 +123,7 @@ if __name__ == "__main__":
     try:
         json_data = json_load(SAVE_FILE)
         if json_data is not None:
-            pass
+            build_trees(json_data)
         bot.run(load_token())
     finally:
         print("East is out.")
