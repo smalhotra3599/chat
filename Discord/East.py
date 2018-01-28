@@ -1,7 +1,7 @@
 """
-    Talos for Discord
+    East for Discord
     A python based bot for discord, good for writing and a couple of minor shenanigans.
-    Author: CraftSpider
+    Author: CraftSpider, HiddenStorys
 """
 import discord
 import traceback
@@ -21,7 +21,7 @@ VERSION = "2.2.1"
 BOOT_TIME = datetime.datetime.now()
 EGG_DEV = "wundrweapon#4856"
 STARTUP_EXTENSIONS = ["Commands", "UserCommands", "AdminCommands"]
-SAVE_FILE = "./TalosData.dat"
+SAVE_FILE = "./EastData.dat"
 
 #
 #   Command Vars
@@ -36,7 +36,7 @@ TOKEN_FILE = "Token.txt"
 logging.basicConfig(level=logging.INFO)
 
 
-class Talos(commands.Bot):
+class East(commands.Bot):
 
     VERSION = VERSION
 
@@ -112,7 +112,7 @@ def json_save(filename, **options):
 if __name__ == "__main__":
 
     description = '''Hey, I'm East, and I'm here to help! You can get me to do stuff with these commands::'''
-    bot = Talos(command_prefix='!East ', description=description)
+    bot = East(command_prefix='!East ', description=description)
 
     for extension in STARTUP_EXTENSIONS:
         try:
