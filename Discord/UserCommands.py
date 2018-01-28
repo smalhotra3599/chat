@@ -1,16 +1,16 @@
 """
-    User Commands cog for Talos
+    User Commands cog for East
     Holds all user specific commands, those things that alter a user's permissions, roles,
-    Talos knowledge of them, so on.
+    East knowledge of them, so on.
 
-    Author: CraftSpider
+    Author: CraftSpider, HiddenStorys
 """
 import discord
 from discord.ext import commands
 
 
 class UserCommands:
-    """These commands can be used by anyone, as long as Talos is awake.\nThe effects will apply to the person using the command."""
+    """These commands can be used by anyone, as long as East is awake.\nThe effects will apply to the person using the command."""
 
     __slots__ = ['bot']
 
@@ -19,14 +19,14 @@ class UserCommands:
 
     @commands.command()
     async def color(self, ctx, color: str):
-        """Changes the User's color, if Talos has role permissions."""
+        """Changes the User's color, if East has role permissions."""
         color_role = None
         if not color.startswith("#") or len(color) is not 7 and len(color) is not 4:
-            await ctx.send("That isn't a valid hexadecimal color!")
+            await ctx.send("Hey! That's not a color.")
             return
 
         for role in ctx.author.roles:
-            if role.name.startswith("<TALOS COLOR>"):
+            if role.name.startswith("<EAST COLOR>"):
                 await ctx.author.remove_roles(role)
 
         discord_color = None
@@ -41,16 +41,16 @@ class UserCommands:
                 discord_color = discord.Colour(int(result, 16))
                 color = "#{}".format(result)
         except ValueError:
-            await ctx.send("That isn't a valid hexadecimal color!")
+            await ctx.send("Hey! That's not a color that works.")
             return
 
         for role in ctx.guild.roles:
-            if role.name.startswith("<TALOS COLOR>") and role.color == discord_color:
+            if role.name.startswith("<EAST COLOR>") and role.color == discord_color:
                 color_role = role
         if color_role is not None:
             await ctx.author.add_roles(ctx.author, color_role)
         else:
-            color_role = await ctx.guild.create_role(name="<TALOS COLOR>", color=discord_color)
+            color_role = await ctx.guild.create_role(name="<EAST COLOR>", color=discord_color)
             # print(ctx.guild.me.top_role.position)
             try:
                 await color_role.edit(position=ctx.guild.me.top_role.position - 1)
