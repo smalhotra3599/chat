@@ -66,7 +66,7 @@ class AdminCommands:
     async def playing(self, ctx, *playing: str):
         """Changes the game East is playing"""
         game = " ".join(map(str, playing))
-        await self.bot.change_presence(game=discord.Game(name=game, type="0"))
+        await self.bot.change_presence(game=discord.Game(name=game, type=0))
         await ctx.send("Hey, I'm playing {}".format(game))
 
     @commands.command(hidden=True)
@@ -123,6 +123,12 @@ class AdminCommands:
         else:
             await ctx.send("That user is already an op! Now they're double opped!")
 
+    @commands.command()
+    @admin_check()
+    async def repeat(self, ctx, *text):
+        """Causes Talos to repeat whatever you said"""
+        await ctx.send(" ".join(text))
+
     @commands.command(aliases=["de_op"])
     @admin_check()
     async def remove_op(self, ctx, member: discord.Member):
@@ -133,6 +139,7 @@ class AdminCommands:
             await self.bot.save()
         except ValueError:
             await ctx.send("That person isn't an op!")
+
 
     @commands.command()
     @admin_check()
