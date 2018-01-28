@@ -1,6 +1,6 @@
 """
-    Admin Commands cog for Talos.
-    Holds all commands relevant to administrator function, be it server specific or all of Talos.
+    Admin Commands cog for East.
+    Holds all commands relevant to administrator function, be it server specific or all of East.
     Author: CraftSpider
 """
 import discord
@@ -14,7 +14,7 @@ from collections import defaultdict
 #
 
 # Hardcoded Admin List
-ADMINS = ["CraftSpider#0269", "Tero#9063", "hiddenstorys#4900", "Hidd/Metallic#3008", "hiddenstorys#3008"]
+ADMINS = ["CraftSpider#0269", "Tero#9063", "hiddenstorys#4900", "Hidd/Metallic#3008", "hiddenstorys#3008", "hidd#3008"]
 # Ops list. Filled on bot load, altered through the add and remove op commands.
 ops = defaultdict(lambda: [])
 # Permissions list. Filled on bot load, altered by command
@@ -126,7 +126,7 @@ class AdminCommands:
     @commands.command()
     @admin_check()
     async def repeat(self, ctx, *text):
-        """Causes Talos to repeat whatever you said"""
+        """Causes East to repeat whatever you said"""
         await ctx.send(" ".join(text))
 
     @commands.command(aliases=["de_op"])
