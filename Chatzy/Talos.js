@@ -10,6 +10,8 @@ const BOOT_TIME = new Date(); //Exact time of Talos boot, used to determine upti
 const WH_TIME = 0; //What hour Writing Hour should start at, in UTC
 // const ADMIN_URL = "http://localhost:8000/Admins.txt"; //URL to pull admin list from
 const ADMINS = []; //Will be filled with Admin data from file
+const messageTable = "X3793";
+const messageContainer = "X2686";
 
 //Control variables
 var CommandsLoaded = false; //So that commands are not run while the Commands script is not yet loaded.
@@ -369,7 +371,9 @@ function readPMs() {
 function mainLoop() {
     //writingHour();
     if (CommandsLoaded) {
+        console.log("reading chat");
         readChat();
+        console.log("reading pms");
         readPMs();
     }
 }
@@ -390,5 +394,5 @@ function talosStart() {
     elementByID(messageTable).innerHTML = '<P class="b">Previous messages parsed (press ESC to re-parse page)</P>\n';
     window[isCleared] = false;
     setInterval(function() {mainLoop();}, 1000);
-    setInterval(function() {window[timeoutTimer] = new Date().getTime(); getAdminNames();}, 1000*60*10);
+//     setInterval(function() {window[timeoutTimer] = new Date().getTime(); getAdminNames();}, 1000*60*10);
 }
