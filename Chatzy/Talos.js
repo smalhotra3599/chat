@@ -8,7 +8,7 @@
 const VERSION = 1.6; //Current Version. Increment upon major changes to structure or functionality.
 const BOOT_TIME = new Date(); //Exact time of Talos boot, used to determine uptime.
 const WH_TIME = 0; //What hour Writing Hour should start at, in UTC
-const ADMIN_URL = "http://localhost:8000/Admins.txt"; //URL to pull admin list from
+// const ADMIN_URL = "http://localhost:8000/Admins.txt"; //URL to pull admin list from
 const ADMINS = []; //Will be filled with Admin data from file
 
 //Control variables
