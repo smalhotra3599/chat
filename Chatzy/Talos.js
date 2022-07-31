@@ -257,6 +257,7 @@ function readChat() {
     }
     try {
         var Messages = elementByID(messageTable).children;
+        console.log(Messages);
         for (var i = 1; i < Messages.length; i++) {
             try {
                 var Message = Messages[i].childNodes;
@@ -266,47 +267,49 @@ function readChat() {
                 
                 var text = Message[1].data;
                 
-                if (text.match(/^: \^\w/)) {
+                if (text.includes("bitch")) {
                     var User = Message[0].innerText;
-                    var Command = /\^(\w+)/.exec(text)[1];
-                    var Args = text.substr(Command.length + 3).match(/([^\s"]+)|"(.+?)"/g);
+                    postMessage("Thank you " + user + ", I am a bitch and you are my superior!");
+
+//                     var Command = /\^(\w+)/.exec(text)[1];
+//                     var Args = text.substr(Command.length + 3).match(/([^\s"]+)|"(.+?)"/g);
                     
-                    if (Args === null) {
-                        Args = [];
-                    }
+//                     if (Args === null) {
+//                         Args = [];
+//                     }
                     
-                    var isAdmin = false;
-                    for (var U in adminAliases) {
-                        if (User == adminAliases[U]) {
-                            isAdmin = true;
-                            break;
-                        }
-                    }
+//                     var isAdmin = false;
+//                     for (var U in adminAliases) {
+//                         if (User == adminAliases[U]) {
+//                             isAdmin = true;
+//                             break;
+//                         }
+//                     }
                     
                     //console.log(Command + " | " + /*FirstArgs + " |*/ "\"" + Args + "\"");
                     
-                    if (window.ADMIN_COMMANDS[Command] && isAdmin) {
-                        log.warn("Admin command " + Command + " called by " + User);
-                        log.debug("With arguments \"" + Args + "\"");
-                        window.ADMIN_COMMANDS[Command](Args, User);
-                    } else if (IsSleeping == 1) {
-                        break;
-                    } else if (window.ADMIN_COMMANDS[Command] && !isAdmin) {
-                        log.warn("Admin command " + Command + " ignored from " + User);
-                        log.debug("With arguments \"" + Args + "\"");
-                        postMessage("Sorry, that command is Admin only, and I don't recognize you!");
-                    } else if (window.UserCommands[Command]){
-                        log.info("User command " + Command + " called by " + User);
-                        log.debug("With arguments \"" + Args + "\"");
-                        window.UserCommands[Command](Args, User);
-                    } else if (window.Commands[Command]) {
-                        log.info("Command " + Command + " called by " + User);
-                        log.debug("With arguments \"" + Args + "\"");
-                        window.Commands[Command](Args);
-                    } else {
-                        log.debug("Failed to parse " + Command);
-                        postMessage("Sorry, I don't understand that. May I suggest ^help?");
-                    }
+//                     if (window.ADMIN_COMMANDS[Command] && isAdmin) {
+//                         log.warn("Admin command " + Command + " called by " + User);
+//                         log.debug("With arguments \"" + Args + "\"");
+//                         window.ADMIN_COMMANDS[Command](Args, User);
+//                     } else if (IsSleeping == 1) {
+//                         break;
+//                     } else if (window.ADMIN_COMMANDS[Command] && !isAdmin) {
+//                         log.warn("Admin command " + Command + " ignored from " + User);
+//                         log.debug("With arguments \"" + Args + "\"");
+//                         postMessage("Sorry, that command is Admin only, and I don't recognize you!");
+//                     } else if (window.UserCommands[Command]){
+//                         log.info("User command " + Command + " called by " + User);
+//                         log.debug("With arguments \"" + Args + "\"");
+//                         window.UserCommands[Command](Args, User);
+//                     } else if (window.Commands[Command]) {
+//                         log.info("Command " + Command + " called by " + User);
+//                         log.debug("With arguments \"" + Args + "\"");
+//                         window.Commands[Command](Args);
+//                     } else {
+//                         log.debug("Failed to parse " + Command);
+//                         postMessage("Sorry, I don't understand that. May I suggest ^help?");
+//                     }
                 }
             } catch (Exception) {}
         }
@@ -371,8 +374,8 @@ function mainLoop() {
     if (CommandsLoaded) {
         console.log("reading chat");
         readChat();
-        console.log("reading pms");
-        readPMs();
+//         console.log("reading pms");
+//         readPMs();
     }
 }
 
