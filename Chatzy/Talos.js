@@ -269,6 +269,7 @@ function readChat() {
                 
                 if (text.includes("bitch")) {
                     var User = Message[0].innerText;
+                    console.log("found bitch");
                     postMessage("Thank you " + user + ", I am a bitch and you are my superior!");
 
 //                     var Command = /\^(\w+)/.exec(text)[1];
@@ -372,7 +373,6 @@ function readPMs() {
 function mainLoop() {
     //writingHour();
     if (CommandsLoaded) {
-        console.log("reading chat");
         readChat();
 //         console.log("reading pms");
 //         readPMs();
