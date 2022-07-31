@@ -381,11 +381,11 @@ function mainLoop() {
 function talosStart() {
     log.debug("Talos Starting");
     
-    readFile(ADMIN_URL).then(function(fileText){
-        parseAdmins(fileText).forEach(function(item) {ADMINS.push(item);});
-        Object.freeze(ADMINS);
-        getAdminNames();
-    });
+//     readFile(ADMIN_URL).then(function(fileText){
+//         parseAdmins(fileText).forEach(function(item) {ADMINS.push(item);});
+//         Object.freeze(ADMINS);
+//         getAdminNames();
+//     });
     
     elementByID(messageTable).innerHTML = '<P class="b">Previous messages parsed (press ESC to re-parse page)</P>\n';
     window[isCleared] = false;
